@@ -17,7 +17,7 @@ public class ProductClient {
     @EqualsAndHashCode.Include
     @Id
     private String id;
-    private Date dateCreated;
+    private String dateCreated;
     private String idProduct;
     private String idClient;
 }
