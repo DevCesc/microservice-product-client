@@ -8,6 +8,12 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 @Service
 public class ProductClientServiceImpl implements IProductClientService {
 
@@ -31,6 +37,9 @@ public class ProductClientServiceImpl implements IProductClientService {
 
     @Override
     public Mono<ProductClient> save(ProductClient productClient) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        productClient.setDateCreated(simpleDateFormat.format(date));
         return repository.save(productClient);
     }
 
