@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -12,7 +13,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Document(collection = "productClient")
-public class ProductClient {
+public class ProductClient implements Serializable {
 
     @EqualsAndHashCode.Include
     @Id

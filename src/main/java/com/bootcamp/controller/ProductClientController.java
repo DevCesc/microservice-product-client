@@ -1,8 +1,10 @@
 package com.bootcamp.controller;
 
+import com.bootcamp.dto.ProductClientDto;
 import com.bootcamp.model.ProductClient;
 import com.bootcamp.service.IProductClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -29,16 +31,26 @@ public class ProductClientController {
                 );
     }
 
-    @GetMapping("/{idclient}")
-    public Flux<ResponseEntity<ProductClient>> findAllByIdClient (@PathVariable("idclient") String idClient){
-        return service.findAllByIdClient(idClient)
-                .map(e -> ResponseEntity.ok()
+//    @Cacheable(value = "productClientCache", key = "#idClient")
+    @GetMapping(value = "/{idclient}")
+    public Mono<ResponseEntity<Flux<ProductClient>>> findAllByIdClient (@PathVariable("idclient") String idClient){
+        Flux<ProductClient> fx = service.findAllByIdClient(idClient);
+               return Mono.just(ResponseEntity.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(e)
+                        .body(fx)
                 )
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
+    @PostMapping(value = "/findAllByIdClientAndDateRange")
+    public Mono<ResponseEntity<Flux<ProductClient>>> findAllByIdClientAndDateRange(@RequestBody ProductClientDto productClientDto) {
+        Flux<ProductClient> fx = service.findAllByIdClientAndDateRange(productClientDto);
+        return Mono.just(ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fx)
+                )
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
 
 
 }

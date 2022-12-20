@@ -9,4 +9,6 @@ import reactor.core.publisher.Flux;
 public interface IProductClientRepository extends ReactiveMongoRepository<ProductClient, String> {
 
     Flux<ProductClient> findAllByIdClient (String idClient);
+
+    Flux<ProductClient> findAllByDateCreatedBetweenAndIdClient(String startDate, String endDate, String idClient);
 }
