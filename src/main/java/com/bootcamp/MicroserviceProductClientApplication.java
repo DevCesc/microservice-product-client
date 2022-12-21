@@ -14,7 +14,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableEurekaClient
 @SpringBootApplication
 @EnableCaching
-public class MicroserviceProductClientApplication implements CommandLineRunner {
+public class MicroserviceProductClientApplication
+//        implements CommandLineRunner
+{
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
     @Autowired
@@ -24,13 +26,13 @@ public class MicroserviceProductClientApplication implements CommandLineRunner {
         SpringApplication.run(MicroserviceProductClientApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        ProductClient productClient = new ProductClient();
-        productClient.setIdClient("638e1f0df55f9276341bc62c");
-        productClient.setIdProduct("638e0d1343742c1abbec2d1b");
-        productClient.setDateCreated("2022-12-14 16:42:13");
-        repository.save(productClient);
-        LOG.info("Done saving productClient. Data: {}.", repository.findAll());
-    }
+//    @Override
+//    public void run(String... args) throws Exception {
+//        ProductClient productClient = new ProductClient();
+//        productClient.setIdClient("638e1f0df55f9276341bc62c");
+//        productClient.setIdProduct("638e0d1343742c1abbec2d1b");
+//        productClient.setDateCreated("2022-12-14 16:42:13");
+//        repository.save(productClient).subscribe();
+//        LOG.info("Done saving productClient. Data: {}.", repository.findAll());
+//    }
 }

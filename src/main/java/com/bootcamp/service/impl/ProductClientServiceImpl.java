@@ -20,8 +20,8 @@ public class ProductClientServiceImpl implements IProductClientService {
     @Autowired
     private IProductClientRepository repository;
 
-    @Override
     @Cacheable(value = "productClientCache", key = "#idClient")
+    @Override
     public Flux<ProductClient> findAllByIdClient(String idClient) {
         return repository.findAllByIdClient(idClient);
     }

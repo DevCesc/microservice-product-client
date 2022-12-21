@@ -3,6 +3,11 @@ eureka:
     prefer-ip-address: true
 
 spring:
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
   application:
     name: microservice-product-client
   cloud:
@@ -10,8 +15,3 @@ spring:
       enabled: true
       label: main
       uri: http://localhost:7000
-  cache:
-    type: redis
-  redis:
-    host: localhost
-    port: 6379
